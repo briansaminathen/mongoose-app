@@ -9,6 +9,11 @@
     <title>Basic Mongoose</title>
 </head>
 <body>
+<% for (var x in user) { %>
+<%= user[x].firstname  %>
+<%= user[x].lastname %>
+<%= user[x].age %> <br>
+<% } %>
 
 
 <form action="/users" method="post">

@@ -3,14 +3,10 @@ module.exports = function Routes (app, server, User) {
     app.get('/', function (req, res) {
         User.find({}, function (err, user) {
             console.log(user[0].firstname);
-            var person = {
-                firstname: user.firstname,
-                lastname: user.lastname,
-                age: user.age
-            }
+
+            res.render('index',{user: user});
 
         });
-        res.render('index');
     });
 
     app.post('/users', function (req, res) {
