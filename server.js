@@ -14,16 +14,20 @@ mongoose.connect('mongodb://localhost/mongoose_dashboard');
 mongoose.Promise = global.Promise;
 
 var UserSchema = new mongoose.Schema({
-    firstname: String,
-    lastname: String,
-    age: Number
+    name: String,
+    color: String,
+    weight : Number,
 }, {timestamps: true});
 
+mongoose.model('Animal', UserSchema); // We are setting this Schema in our Models as Animal
 
-mongoose.model('User', UserSchema); // We are setting this Schema in our Models as User
 
+var Animal = mongoose.model('Animal'); // We are retrieving this Schema from our Models name User
 
-var User = mongoose.model('User'); // We are retrieving this Schema from our Models name User
+Animal.find({}, function (err, results) {
+        console.log('ERROR: ', err);
+        console.log('RESULTS: ', results);
+})
 
 
 app.use(express.static(path.join(__dirname, './static')));
@@ -38,4 +42,4 @@ var server = app.listen(port, function () {
     console.log('Mongoose Dashboard running on port ' + port);
 });
 
-var route = require("./routes/routes.js")(app, server, User);
+var route = require("./routes/routes.js")(app, server, Animal);

@@ -9,23 +9,16 @@
     <title>Basic Mongoose</title>
 </head>
 <body>
-<% for (var x in user) { %>
-<%= user[x].firstname  %>
-<%= user[x].lastname %>
-<%= user[x].age %> <br>
+<p>Inside of index.ejs</p>
+<a href="/new">Add new Animal</a> <br>
+<% for (var x in results) { %>
+<%= results[x].name  %>
+<%= results[x].color %>
+<%= results[x].weight %> <br>
 <% } %>
 
 
-<form action="/users" method="post">
-    <h1>Please enter your information below</h1>
-    <label for="firstname">First Name:</label>
-    <input type="text" name="firstname" placeholder="First Name...">
-    <label for="secondname">Last Name</label>
-    <input type="text" name="lastname" placeholder="Second Name...">
-    <label for="age">Age</label>
-    <input type="text" name="age" placeholder="Age...">
-    <button>Submit</button>
-</form>
+
 
 </body>
 </html>

@@ -1,20 +1,31 @@
-module.exports = function Routes (app, server, User) {
+module.exports = function Routes (app, server, Animal) {
 
 
     // GET Routes
     // Root route will display all animals
     app.get('/', function (req, res) {
-        User.find({}, function (err, user) {
-            res.render('index',{user: user});
+        Animal.find({}, function (err, results) {
+            res.render('index',{results: results});
         });
     });
+
+    // new route to create animal in database, reidrect to '/'
+    app.post('/', function (req, res) {
+        Animal.create(req.body, function (err, result) {
+            if (err) {console.log(err)};
+            res.redirect('/');
+            
+        })
+    })
+
     
     app.get('/new', function (req, res) {
         res.render('new');
     });
 
     app.get('/:id/edit', function (req, res) {
-        res.render('edit');
+        var id = req.params.id;
+        res.render('edit', {id: id});
     });
 
     app.get('/:id', function (req, res) {
