@@ -26,7 +26,7 @@ var Animal = mongoose.model('Animal'); // We are retrieving this Schema from our
 
 Animal.find({}, function (err, results) {
         console.log('ERROR: ', err);
-        console.log('RESULTS: ', results);
+        //console.log('RESULTS: ', results);
 })
 
 

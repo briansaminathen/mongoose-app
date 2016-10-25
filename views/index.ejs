@@ -10,11 +10,12 @@
 </head>
 <body>
 <p>Inside of index.ejs</p>
-<a href="/new">Add new Animal</a> <br>
+
+<a href="/new">Add new Animal</a>   <br><br>
 <% for (var x in results) { %>
 <%= results[x].name  %>
 <%= results[x].color %>
-<%= results[x].weight %> <br>
+<%= results[x].weight %> <a href="/<%= results[x]._id %>/edit">edit animal</a> <a href="/<%= results[x]._id %>/delete">Delete</a><br>
 <% } %>
 
 

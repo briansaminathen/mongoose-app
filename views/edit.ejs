@@ -8,7 +8,19 @@
     <title>Document</title>
 </head>
 <body>
+
 <p>Inside of edit.ejs</p><br>
-<p>Edit Dog #<%= id %></p>
+<p>Edit #<%= Animal._id %></p>
+
+    <form action="/<%= Animal._id  %>" method="post">
+
+        <h1>Please enter your information below</h1>
+        <label for="name">Name:</label><input type="text" name="name" placeholder="Name..." value="<%= Animal.name %>">
+        <label for="color">Color</label><input type="text" name="color" placeholder="Color..." value="<%= Animal.color %>">
+        <label for="weight">weight</label><input type="text" name="weight" placeholder="weight..." value="<%= Animal.WEIGHT %>">
+
+        <button>Submit</button>
+
+    </form>
 </body>
 </html>

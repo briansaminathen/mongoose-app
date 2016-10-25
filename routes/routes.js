@@ -1,32 +1,46 @@
 module.exports = function Routes (app, server, Animal) {
+    app.get('/:id/delete', function (req, res) {
+        Animal.remove({_id: req.params.id}, function (err, results) {
+            console.log(results);
+            res.redirect('/');
+        });
+    })
 
-
-    // GET Routes
     // Root route will display all animals
     app.get('/', function (req, res) {
         Animal.find({}, function (err, results) {
-            res.render('index',{results: results});
+            if (err) { console.log(err) };
+            res.render('index', {results: results});
         });
     });
 
-    // new route to create animal in database, reidrect to '/'
+    // new route to create animal in database, redirect to '/'
     app.post('/', function (req, res) {
         Animal.create(req.body, function (err, result) {
             if (err) {console.log(err)};
             res.redirect('/');
-            
-        })
-    })
+        });
+    });
 
-    
     app.get('/new', function (req, res) {
         res.render('new');
     });
 
-    app.get('/:id/edit', function (req, res) {
-        var id = req.params.id;
-        res.render('edit', {id: id});
+    app.get('/:id/edit/', function (req, res) {
+        Animal.find({_id: req.params.id}, function (err, response) {
+            console.log(response);
+            res.render('edit', {Animal: response[0]});
+        })
     });
+
+    app.post('/:id', function (req, res) {
+        // update animal
+
+        console.log('Need to update dog', req.params.id);
+        Animal.update({_id: req.params.id},req.body, function (err, result) {
+        res.redirect('/');
+        })
+    })
 
     app.get('/:id', function (req, res) {
         res.render('show')
