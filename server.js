@@ -9,6 +9,7 @@ var express = require('express'),
 // Create express app
 var app = express();
 
+
 app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect('mongodb://localhost/mongoose_dashboard');
 mongoose.Promise = global.Promise;
@@ -25,9 +26,10 @@ mongoose.model('Animal', UserSchema); // We are setting this Schema in our Model
 var Animal = mongoose.model('Animal'); // We are retrieving this Schema from our Models name User
 
 Animal.find({}, function (err, results) {
-        console.log('ERROR: ', err);
-        //console.log('RESULTS: ', results);
-})
+        if(err) {
+            console.log('ERROR: ', err)
+        };
+});
 
 
 app.use(express.static(path.join(__dirname, './static')));
@@ -38,8 +40,8 @@ app.set('view engine', 'ejs');
 
 
 
-var server = app.listen(port, function () {
+app.listen(port, function () {
     console.log('Mongoose Dashboard running on port ' + port);
 });
 
-var route = require("./routes/routes.js")(app, server, Animal);
+var route = require("./server/config/routes.js")(app);
