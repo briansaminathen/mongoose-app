@@ -1,5 +1,6 @@
-var mongoose = require('mongoose');
-var Quote = mongoose.model('Animal');
+var mongoose = require('mongoose'),
+    Quote = mongoose.model('Animal');
+
 module.exports = {
     rootRoute: function (req, res) {
         Quote.find({}, function (err, results) {

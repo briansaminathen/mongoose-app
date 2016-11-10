@@ -9,34 +9,14 @@ var express = require('express'),
 // Create express app
 var app = express();
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
-mongoose.connect('mongodb://localhost/mongoose_dashboard');
-mongoose.Promise = global.Promise;
-
-var UserSchema = new mongoose.Schema({
-    name: String,
-    color: String,
-    weight : Number,
-}, {timestamps: true});
-
-mongoose.model('Animal', UserSchema); // We are setting this Schema in our Models as Animal
-
-
-var Animal = mongoose.model('Animal'); // We are retrieving this Schema from our Models name User
-
-Animal.find({}, function (err, results) {
-        if(err) {
-            console.log('ERROR: ', err)
-        };
-});
-
-
-app.use(express.static(path.join(__dirname, './static')));
+app.use(express.static(path.join(__dirname, './client/static')));
 
 // Tell server where views are and what templating engine I"m using
-app.set('views', path.join(__dirname, './views'));
+app.set('views', path.join(__dirname, './client/views'));
 app.set('view engine', 'ejs');
+require('./server/config/mongoose.js');
+require('./server/models/quote.js');
 
 
 
